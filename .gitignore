@@ -1,5 +1,6 @@
-.build/
-.cache/
+_build/
+_cache/
+_venv/
 data/log/
 
 #############################
