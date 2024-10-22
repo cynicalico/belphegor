@@ -30,7 +30,7 @@ CPMAddPackage(
 CPMAddPackage(
         NAME quill
         GITHUB_REPOSITORY odygrd/quill
-        VERSION 7.3.0)
+        GIT_TAG 30c06f446ea75cbbcee73f18a2bd8bdc1b365967)
 
 add_library(belphegor_thirdparty INTERFACE)
 

@@ -5,8 +5,6 @@ project(belphegor
         HOMEPAGE_URL "https://github.com/cynicalico/belphegor"
         LANGUAGES C CXX)
 
-set(CMAKE_CXX_EXTENSIONS OFF)
-
 add_library(belphegor STATIC)
 
 target_sources(belphegor PUBLIC
@@ -22,6 +20,17 @@ target_sources(belphegor PUBLIC
         #[=[ [[[end]]] ]=])
 
 target_sources(belphegor PUBLIC
+        #[=[ [[[cog
+        import cog, os
+        for root, _, files in os.walk("src", topdown=False):
+            for f in files:
+                if not any(f.endswith(e) for e in [".cpp"]): continue
+                cog.outl(os.path.join(root, f).replace('\\', '/'))
+        ]]] ]=]
+        src/belphegor/log.cpp
+        #[=[ [[[end]]] ]=])
+
+target_sources(belphegor PUBLIC
         FILE_SET CXX_MODULES FILES
         #[=[ [[[cog
         import cog, os
@@ -30,7 +39,6 @@ target_sources(belphegor PUBLIC
                 if not any(f.endswith(e) for e in [".cppm"]): continue
                 cog.outl(os.path.join(root, f).replace('\\', '/'))
         ]]] ]=]
-        src/belphegor/log.cppm
         src/belphegor/engine.cppm
         #[=[ [[[end]]] ]=])
 
@@ -40,6 +48,10 @@ target_include_directories(belphegor PUBLIC include)
 
 target_compile_definitions(belphegor PUBLIC
         QUILL_COMPILE_ACTIVE_LOG_LEVEL=QUILL_COMPILE_ACTIVE_LOG_LEVEL_$<IF:$<CONFIG:Debug>,DEBUG,INFO>)
+
+if (MSVC)
+    target_compile_options(belphegor PUBLIC /Zc:preprocessor)
+endif (MSVC)
 
 include(cmake/get_cpm.cmake)
 include(cmake/get_thirdparty.cmake)

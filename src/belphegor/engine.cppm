@@ -1,6 +1,5 @@
 module;
 
-#include "fmt/base.h"
 #include "SDL3/SDL.h"
 #include "belphegor/log.hpp"
 
