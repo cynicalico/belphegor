@@ -1,7 +1,7 @@
 import os
 
 FILES_TO_COG = [
-    'CMakeLists.txt'
+    'cmake/file_lists.cmake'
 ]
 
 if __name__ == '__main__':
