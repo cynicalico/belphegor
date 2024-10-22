@@ -1,5 +1,7 @@
+#include "belphegor/log.hpp"
+
 import gor.engine;
 
 auto main(int, char *[]) -> int {
-    gor::say_hello();
+    auto e = gor::engine();
 }
